@@ -1,0 +1,35 @@
+# Build artifacts
+.vscode
+/kernelbuild/*
+/cdrom/sys/*.bin
+/kernel/obj/*
+/bootstrapper/legacy/*/build
+/bootstrapper/legacy/*/obj
+
+# build file
+build.h
+
+# ide config
+.idea
+
+# ignore vim swp file
+*.swp
+
+# Ignore memory dumps
+*.dmp
+
+# Ignore efi bins
+*.efi
+
+# Work folder
+/work
+/kernel/work
+
+# Python cache
+__pycache__
+
+# Ignore hidden folders
+/__*
+
+# Venv
+venv
