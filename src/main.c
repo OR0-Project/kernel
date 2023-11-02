@@ -5,6 +5,8 @@
 #include <util/string.h>
 #include <types.h>
 #include <build.h>
+#include <io/port.h>
+#include <dev/serial.h>
 
 // For testing
 #include <arch/cpu.h>
@@ -61,20 +63,13 @@ void init_kernel_mem() {
  * */
 void kernel_main() {
     init_kernel_mem();	// TODO: refactor (after printf)
+    
+    serial_config(COM1);
+    serial_print(COM1, "-- OS Serial Output --\r\n");
+
 	splash();				// TODO: refactor (after printf)
 
 	read_tsc();
-
-    // test
-    volatile char* mt = (char*)0x2a5C0;
-
-    *mt = 'a';
-    mt++;
-    *mt = 'b';
-    mt++;
-    *mt = 'c';
-    mt++;
-    while(1);
 
     throw_ex("kmain", "End of kernel - development needed");
 

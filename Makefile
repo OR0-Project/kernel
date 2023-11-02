@@ -24,10 +24,10 @@ clean:
 all: build/kernel
 
 build/kernel: prep multiboot.o kernel.o main.o 
-	$(LINK) $(LINK_FLAGS) -o build/kernel64.bin obj/multiboot.o obj/kernel.o obj/kern/kutil.o obj/kern/kmem.o obj/util/string.o obj/dev/console.o obj/io/port.o obj/arch/x86/cpu.o obj/main.o -T src/kernel.ld
+	$(LINK) $(LINK_FLAGS) -o build/kernel64.bin obj/multiboot.o obj/kernel.o obj/kern/kutil.o obj/kern/kmem.o obj/util/string.o obj/dev/console.o obj/dev/serial.o obj/io/port.o obj/arch/x86/cpu.o obj/main.o -T src/kernel.ld
 
 # objects
-main.o: obj/dev/console.o obj/io/port.o obj/kern/kutil.o obj/kern/kmem.o obj/util/string.o obj/arch/x86/cpu.o
+main.o: obj/dev/serial.o obj/dev/console.o obj/io/port.o obj/kern/kutil.o obj/kern/kmem.o obj/util/string.o obj/arch/x86/cpu.o
 	$(CC) src/main.c -o obj/main.o $(C_FLAGS)
 
 obj/kern/kutil.o:
@@ -38,6 +38,9 @@ obj/kern/kmem.o:
 
 obj/dev/console.o:
 	$(CC) src/dev/console.c -o obj/dev/console.o $(C_FLAGS)
+	
+obj/dev/serial.o:
+	$(CC) src/dev/serial.c -o obj/dev/serial.o $(C_FLAGS)
 
 obj/io/port.o:
 	$(ASM) src/io/port.asm -o obj/io/port.o $(ASM_FLAGS)
